@@ -37,7 +37,7 @@ A modern, React-based Confluence Cloud app that renders OpenAPI/Swagger document
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/swagger-confluence.git
+git clone https://github.com/reynldi/bring-swagger-to-confluence.git
 cd swagger-confluence
 
 # Install dependencies
