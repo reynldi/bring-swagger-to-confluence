@@ -1,0 +1,76 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Environment variables
+[build.environment]
+  NODE_ENV = "production"
+  VITE_APP_NAME = "Swagger Documentation for Confluence"
+
+# Function configuration
+[functions]
+  directory = "netlify/functions"
+
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Additional security for the app descriptor
+[[headers]]
+  for = "/atlassian-connect.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=300"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache fonts and images
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects for Atlassian Connect lifecycle
+[[redirects]]
+  from = "/installed"
+  to = "/.netlify/functions/installed"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/uninstalled"
+  to = "/.netlify/functions/uninstalled"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/health"
+  status = 200
+  force = true
+
+# SPA fallback - must be last
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

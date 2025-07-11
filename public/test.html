@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confluence Test Page</title>
+    <script src="https://connect-cdn.atl-paas.net/all.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: white;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .swagger-preview {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            background: #f8f9fa;
+        }
+        .endpoint {
+            margin: 10px 0;
+            padding: 8px 12px;
+            border-left: 4px solid #007bff;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>✅ Confluence Connection Test</h1>
+        
+        <div class="status success">
+            <strong>SUCCESS:</strong> This page loaded successfully in Confluence!
+        </div>
+        
+        <div class="status info">
+            <strong>URL:</strong> <span id="current-url"></span><br>
+            <strong>Mode:</strong> <span id="mode-param"></span><br>
+            <strong>Config:</strong> <span id="config-param"></span>
+        </div>
+        
+        <h2>🎯 Simulated Swagger Documentation</h2>
+        <div class="swagger-preview">
+            <h3>Swagger Petstore - OpenAPI 3.0</h3>
+            <p><strong>Version:</strong> 1.0.17</p>
+            
+            <h4>pet - Everything about your Pets</h4>
+            <div class="endpoint">
+                <strong>GET</strong> /pet/findByStatus - Finds Pets by status
+            </div>
+            <div class="endpoint">
+                <strong>POST</strong> /pet - Add a new pet to the store
+            </div>
+            <div class="endpoint">
+                <strong>PUT</strong> /pet - Update an existing pet
+            </div>
+            
+            <h4>store - Access to Petstore orders</h4>
+            <div class="endpoint">
+                <strong>GET</strong> /store/inventory - Returns pet inventories by status
+            </div>
+            <div class="endpoint">
+                <strong>POST</strong> /store/order - Place an order for a pet
+            </div>
+            
+            <h4>user - Operations about user</h4>
+            <div class="endpoint">
+                <strong>POST</strong> /user - Create user
+            </div>
+            <div class="endpoint">
+                <strong>GET</strong> /user/login - Logs user into the system
+            </div>
+        </div>
+        
+        <div class="status info">
+            <strong>Next Step:</strong> If you can see this content in Confluence, then the domain loading works. 
+            The issue is likely with React initialization.
+        </div>
+    </div>
+
+    <script>
+        console.log('🧪 TEST PAGE LOADED');
+        console.log('URL:', window.location.href);
+        
+        // Display URL info
+        document.getElementById('current-url').textContent = window.location.href;
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('mode-param').textContent = urlParams.get('mode') || 'none';
+        document.getElementById('config-param').textContent = urlParams.get('config') || 'none';
+        
+        // Initialize Confluence AP
+        if (window.AP) {
+            console.log('📏 AP available, resizing...');
+            if (window.AP.resize) {
+                window.AP.resize();
+            }
+        } else {
+            console.log('⚠️ AP not available');
+        }
+        
+        setTimeout(function() {
+            console.log('✅ Test page fully loaded and functional');
+        }, 1000);
+    </script>
+</body>
+</html> 
